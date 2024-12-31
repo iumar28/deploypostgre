@@ -71,7 +71,7 @@ jobs:
             # Clone docker-compose repository
             git clone https://github.com/iumar28/deploypostgre
             cd deploypostgre
-            docker build -t iumar28/deploypostgre 
+            docker build -t iumar28/deploypostgre .
             # Run Docker Compose to deploy
             docker-compose up -d
           EOF
