@@ -47,30 +47,36 @@ jobs:
             sudo apt install -y docker.io
             sudo systemctl start docker
             sudo systemctl enable docker
-            
+
             # Add user to Docker group
             sudo usermod -aG docker ubuntu
-            
+
             # Refresh group membership
             newgrp docker
-            
+
             # Install Docker Compose
             DOCKER_COMPOSE_VERSION="2.20.2"
             sudo curl -L "https://github.com/docker/compose/releases/download/v\$DOCKER_COMPOSE_VERSION/docker-compose-\$(uname -s)-\$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
-            
+
             # Verify Docker Compose installation
             docker-compose --version
-            
-            # Pull Docker image from Docker Hub
-            docker pull iumar28/deploypostgre
 
-            .
-            
-            # Clone docker-compose repository
+            # Authenticate Docker
+            echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+            # Pull Docker image from Docker Hub
+            docker pull iumar28/deploypostgre:latest
+
+            # Clone the repository (remove if exists)
+            if [ -d "deploypostgre" ]; then
+              rm -rf deploypostgre
+            fi
             git clone https://github.com/iumar28/deploypostgre
+
             cd deploypostgre
+
+            # Build and deploy the Docker image
             docker build -t iumar28/deploypostgre .
-            # Run Docker Compose to deploy
             docker-compose up -d
           EOF
