@@ -14,7 +14,7 @@ services:
 
   jhipster:
     image: iumar28/deploypostgre 
-    container_name: deploypostgre       
+    container_name: iumar28/deploypostgre       
     depends_on:
       - postgres                   
     environment:
