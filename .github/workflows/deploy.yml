@@ -66,7 +66,7 @@ jobs:
             # Pull Docker image from Docker Hub
             docker pull iumar28/deploypostgre
 
-            docker build -t deploypostgre .
+            docker build -t iumar28/deploypostgre .
             
             # Clone docker-compose repository
             git clone https://github.com/iumar28/deploypostgre
