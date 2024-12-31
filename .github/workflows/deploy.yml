@@ -63,11 +63,11 @@ jobs:
             docker-compose --version
             
             # Pull Docker image from Docker Hub
-            docker pull ${{ secrets.DOCKER_USERNAME }}/deploymysql:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/deploypostgre:latest
             
             # Clone docker-compose repository
-            git clone https://github.com/iumar28/deploymysql
-            cd deploymysql
+            git clone https://github.com/iumar28/deploypostgre
+            cd deploypostgre
             
             # Run Docker Compose to deploy
             docker-compose up -d
