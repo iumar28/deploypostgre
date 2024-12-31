@@ -64,7 +64,7 @@ jobs:
             
             echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
             # Pull Docker image from Docker Hub
-            docker pull ${{ secrets.DOCKER_USERNAME }}/deploypostgre:latest
+            docker pull iumar28/deploypostgre
             
             # Clone docker-compose repository
             git clone https://github.com/iumar28/deploypostgre
